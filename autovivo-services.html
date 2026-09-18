@@ -182,7 +182,7 @@
     background: var(--color-neutral-900);
     border: 1px solid var(--color-neutral-700);
     border-radius: var(--radius-lg);
-    padding: var(--space-6);
+    overflow: hidden;
     display: flex; flex-direction: column;
     transition: all var(--duration-base) var(--ease-out);
     animation: fadeUp .4s var(--ease-out) both;
@@ -191,6 +191,34 @@
     border-color: var(--color-brand-primary);
     box-shadow: 0 4px 24px rgba(74,124,16,.1);
     transform: translateY(-2px);
+  }
+  .svc-card-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--color-brand-secondary) 0%, var(--color-brand-primary) 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .svc-card-image::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 18% 12%, rgba(210,253,156,.4) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .svc-card-image svg {
+    width: 25%;
+    max-width: 60px;
+    height: auto;
+    color: #fff;
+    position: relative; z-index: 1;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,.15));
+  }
+  .svc-card-body {
+    padding: var(--space-6);
+    display: flex; flex-direction: column;
+    flex: 1;
   }
   .svc-card-top {
     display: flex; align-items: flex-start;
@@ -309,6 +337,7 @@
   <ul class="nav-links">
     <li><a href="autovivo-home.html">Home</a></li>
     <li><a href="autovivo-services.html" class="active">Services</a></li>
+    <li><a href="autovivo-gallery.html">Gallery</a></li>
     <li><a href="autovivo-home.html#services">About</a></li>
     <li><a href="autovivo-home.html#contact">Contact</a></li>
   </ul>
@@ -369,7 +398,7 @@
             <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (formerly Twitter)">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+            <a href="https://www.facebook.com/profile.php?id=61592779245894" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
             </a>
           </div>
@@ -383,6 +412,7 @@
           <ul class="footer-links" role="list">
             <li><a href="autovivo-home.html">Home</a></li>
             <li><a href="autovivo-services.html">Services</a></li>
+            <li><a href="autovivo-gallery.html">Gallery</a></li>
             <li><a href="autovivo-home.html#services">About</a></li>
             <li><a href="autovivo-home.html#reviews">Reviews</a></li>
             <li><a href="autovivo-home.html#contact">Contact</a></li>
@@ -425,23 +455,23 @@ const SERVICES = [
   {id:300,cat:'Packages',name:'Bronze Package',time:'from $119.95',desc:'Oil Change + Vehicle Health Check. Includes a full 10-point inspection. Small vehicle $119.95 — Large vehicle $149.95.'},
   {id:301,cat:'Packages',name:'Silver Package',time:'from $159.95',desc:'Oil Change + Alignment Inspection + Vehicle Health Check. Our most popular bundle. Small vehicle $159.95 — Large vehicle $189.95.'},
   {id:302,cat:'Packages',name:'Gold Package',time:'from $319.95',desc:'Oil Change + Alignment Inspection + Brake Fluid Flush + Cabin Air Filter + Vehicle Health Check. Complete care bundle. Small vehicle $319.95 — Large vehicle $349.95.'},
-  {id:0,cat:'Popular',name:'Oil Change',time:'30 min',desc:'Drain the old engine oil, replace it with fresh oil, and install a new oil filter to keep the engine properly lubricated and running smoothly.'},
-  {id:1,cat:'Popular',name:'Tires (Repair, Replacement & Flat Fix)',time:'30–60 min',desc:'We safely remove and install your tires at your location, ensuring they are properly mounted and ready for the road.'},
-  {id:2,cat:'Popular',name:'Brake Pad Replacement',time:'45–60 min',desc:'Remove worn brake pads and install new ones to restore safe stopping power and prevent damage to the brake rotors.'},
-  {id:3,cat:'Popular',name:'Battery Replacement',time:'30–45 min',desc:'Remove the old battery and install a new one to ensure the vehicle starts reliably and the electrical system functions properly.'},
-  {id:4,cat:'Popular',name:'Tire Rotation',time:'20–30 min',desc:'Move tires between the front and rear positions to promote even tire wear and extend the life of the tires.'},
-  {id:5,cat:'Popular',name:'Engine Air Filter Replacement',time:'15–20 min',desc:'Install a new engine air filter to ensure the engine receives clean air for efficient combustion.'},
-  {id:6,cat:'Popular',name:'Cabin Air Filter Replacement',time:'15–20 min',desc:'Replace the cabin air filter to improve air quality entering the vehicle interior through the ventilation system.'},
-  {id:7,cat:'Popular',name:'Spark Plug Replacement',time:'30–45 min',desc:'Install new spark plugs to improve engine ignition, fuel efficiency, and overall engine performance.'},
-  {id:8,cat:'Popular',name:'Coolant Flush',time:'45–60 min',desc:'Drain old coolant from the cooling system and refill with fresh coolant to help prevent engine overheating and corrosion.'},
-  {id:9,cat:'Popular',name:'Transmission Fluid Change',time:'45–60 min',desc:'Replace old transmission fluid with new fluid to help maintain smooth gear shifting and protect the transmission.'},
-  {id:10,cat:'Popular',name:'Brake Fluid Flush',time:'30–45 min',desc:'Remove contaminated brake fluid and refill with fresh fluid to maintain proper braking performance and safety.'},
-  {id:11,cat:'Popular',name:'Serpentine Belt Replacement',time:'30–60 min',desc:'Install a new serpentine belt to restore proper operation of engine-driven components like the alternator and AC.'},
-  {id:12,cat:'Popular',name:'Power Steering Fluid Replacement',time:'15–20 min',desc:'Check the power steering system and add fluid if necessary to ensure smooth and easy steering.'},
-  {id:13,cat:'Popular',name:'Light Bulb Replacement',time:'20–30 min',desc:'Replace faulty or burnt-out headlight or taillight bulbs to restore proper vehicle visibility and road safety.'},
-  {id:14,cat:'Popular',name:'Windshield Wiper Replacement',time:'10–15 min',desc:'Install new windshield wiper blades to improve visibility during rain, snow, or windshield cleaning.'},
-  {id:15,cat:'Popular',name:'Alternator Replacement',time:'60–90 min',desc:'Remove a faulty alternator and install a new one to restore proper battery charging and electrical system performance.'},
-  {id:16,cat:'Popular',name:'Check Engine Light Inspection',time:'15–30 min',desc:'Scan the vehicle computer for engine codes, identify potential issues, and reset the check engine light if appropriate.'},
+  {id:0,cat:'Popular',icon:'oil',name:'Oil Change',time:'30 min',desc:'Drain the old engine oil, replace it with fresh oil, and install a new oil filter to keep the engine properly lubricated and running smoothly.'},
+  {id:1,cat:'Popular',icon:'tires',name:'Tires (Repair, Replacement & Flat Fix)',time:'30–60 min',desc:'We safely remove and install your tires at your location, ensuring they are properly mounted and ready for the road.'},
+  {id:2,cat:'Popular',icon:'brakePad',name:'Brake Pad Replacement',time:'45–60 min',desc:'Remove worn brake pads and install new ones to restore safe stopping power and prevent damage to the brake rotors.'},
+  {id:3,cat:'Popular',icon:'battery',name:'Battery Replacement',time:'30–45 min',desc:'Remove the old battery and install a new one to ensure the vehicle starts reliably and the electrical system functions properly.'},
+  {id:4,cat:'Popular',icon:'tireRotation',name:'Tire Rotation',time:'20–30 min',desc:'Move tires between the front and rear positions to promote even tire wear and extend the life of the tires.'},
+  {id:5,cat:'Popular',icon:'engineFilter',name:'Engine Air Filter Replacement',time:'15–20 min',desc:'Install a new engine air filter to ensure the engine receives clean air for efficient combustion.'},
+  {id:6,cat:'Popular',icon:'cabinFilter',name:'Cabin Air Filter Replacement',time:'15–20 min',desc:'Replace the cabin air filter to improve air quality entering the vehicle interior through the ventilation system.'},
+  {id:7,cat:'Popular',icon:'sparkPlug',name:'Spark Plug Replacement',time:'30–45 min',desc:'Install new spark plugs to improve engine ignition, fuel efficiency, and overall engine performance.'},
+  {id:8,cat:'Popular',icon:'coolant',name:'Coolant Flush',time:'45–60 min',desc:'Drain old coolant from the cooling system and refill with fresh coolant to help prevent engine overheating and corrosion.'},
+  {id:9,cat:'Popular',icon:'transmission',name:'Transmission Fluid Change',time:'45–60 min',desc:'Replace old transmission fluid with new fluid to help maintain smooth gear shifting and protect the transmission.'},
+  {id:10,cat:'Popular',icon:'brakeFluid',name:'Brake Fluid Flush',time:'30–45 min',desc:'Remove contaminated brake fluid and refill with fresh fluid to maintain proper braking performance and safety.'},
+  {id:11,cat:'Popular',icon:'belt',name:'Serpentine Belt Replacement',time:'30–60 min',desc:'Install a new serpentine belt to restore proper operation of engine-driven components like the alternator and AC.'},
+  {id:12,cat:'Popular',icon:'powerSteering',name:'Power Steering Fluid Replacement',time:'15–20 min',desc:'Check the power steering system and add fluid if necessary to ensure smooth and easy steering.'},
+  {id:13,cat:'Popular',icon:'bulb',name:'Light Bulb Replacement',time:'20–30 min',desc:'Replace faulty or burnt-out headlight or taillight bulbs to restore proper vehicle visibility and road safety.'},
+  {id:14,cat:'Popular',icon:'wiper',name:'Windshield Wiper Replacement',time:'10–15 min',desc:'Install new windshield wiper blades to improve visibility during rain, snow, or windshield cleaning.'},
+  {id:15,cat:'Popular',icon:'alternator',name:'Alternator Replacement',time:'60–90 min',desc:'Remove a faulty alternator and install a new one to restore proper battery charging and electrical system performance.'},
+  {id:16,cat:'Popular',icon:'checkEngine',name:'Check Engine Light Inspection',time:'15–30 min',desc:'Scan the vehicle computer for engine codes, identify potential issues, and reset the check engine light if appropriate.'},
   {id:17,cat:'Scheduled Maintenance',name:'5,000 km Service',time:'45–60 min',desc:'Routine maintenance service at the 5,000 km interval to keep your vehicle running at its best.'},
   {id:18,cat:'Scheduled Maintenance',name:'10,000 km Service',time:'60–75 min',desc:'Scheduled inspection and fluid check at the 10,000 km mark.'},
   {id:19,cat:'Scheduled Maintenance',name:'20,000 km Service',time:'75–90 min',desc:'Mid-interval maintenance covering fluids, filters, and general inspection.'},
@@ -566,6 +596,28 @@ function esc(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+/* Original line-icon illustrations for the Popular service cards.
+   Consistent 48x48 viewBox, stroke-based, matches the site's existing icon style. */
+const ICONS = {
+  oil: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6C24 6 12 22 12 30a12 12 0 0 0 24 0C36 22 24 6 24 6Z"/><path d="M18.5 30a5.5 5.5 0 0 0 5.5 5.5" stroke-width="1.6" opacity="0.55"/></svg>',
+  tires: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="6"/><path d="M24 8v4M24 36v4M8 24h4M36 24h4M13.8 13.8l2.8 2.8M31.4 31.4l2.8 2.8M13.8 34.2l2.8-2.8M31.4 16.6l2.8-2.8"/></svg>',
+  brakePad: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="24" r="14"/><circle cx="21" cy="24" r="4"/><path d="M21 12v6M21 30v6M11 22.5l5 1.5-5 1.5M31 22.5l-5 1.5 5 1.5" stroke-width="1.6" opacity="0.55"/><path d="M31 15a11 11 0 0 1 0 18h6.5a1.5 1.5 0 0 0 1.5-1.5v-15a1.5 1.5 0 0 0-1.5-1.5H31Z"/></svg>',
+  battery: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="16" width="30" height="20" rx="3"/><path d="M17 16v-4M31 16v-4"/><path d="M17.5 26h5M20 23.5v5" stroke-width="2.2"/><path d="M28 26h6"/></svg>',
+  tireRotation: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="9"/><circle cx="24" cy="24" r="3"/><path d="M24 5a19 19 0 0 1 18 13"/><path d="M42 12l1-6-6 1.5"/><path d="M24 43a19 19 0 0 1-18-13"/><path d="M6 36l-1 6 6-1.5"/></svg>',
+  engineFilter: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="10" width="32" height="28" rx="3"/><path d="M15 10v28M21.5 10v28M28 10v28M34.5 10v28" stroke-width="1.6" opacity="0.55"/></svg>',
+  cabinFilter: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="32" height="21" rx="3"/><path d="M8 14.5h32M8 20.5h32M8 26.5h32" stroke-width="1.6" opacity="0.55"/><path d="M16 38c2.5-3.5 13.5-3.5 16 0"/></svg>',
+  sparkPlug: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6h10v8H19z"/><path d="M20.5 14h7v10h-7z"/><path d="M22 24h4v8a2 2 0 0 1-4 0v-8Z"/><path d="M19 39l3-4.5M29 39l-3-4.5"/></svg>',
+  coolant: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="10" width="24" height="26" rx="2"/><path d="M13 10v26M19 10v26M25 10v26" stroke-width="1.6" opacity="0.55"/><path d="M36 23c0 0-5.5 6.3-5.5 10a5.5 5.5 0 0 0 11 0C41.5 29.3 36 23 36 23Z"/></svg>',
+  transmission: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="24" r="9"/><circle cx="21" cy="24" r="3.2"/><path d="M21 9v4M21 35v4M32.7 12.3l-2.8 2.8M11.1 33.9l-2.8 2.8M36 24h-4M6 24h4M32.7 35.7l-2.8-2.8M11.1 14.1l-2.8-2.8"/><path d="M36 30c0 0-4 4.6-4 7.3a4 4 0 0 0 8 0C40 34.6 36 30 36 30Z"/></svg>',
+  brakeFluid: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h12v6l3 3v21a2 2 0 0 1-2 2H17a2 2 0 0 1-2-2V17l3-3V8Z"/><path d="M16 27h16" stroke-width="1.6" opacity="0.55"/><path d="M18 8h12" stroke-width="2.2"/></svg>',
+  belt: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="14" width="30" height="20" rx="10"/><circle cx="16" cy="24" r="5"/><circle cx="32" cy="24" r="5"/></svg>',
+  powerSteering: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="23" r="12"/><circle cx="19" cy="23" r="3"/><path d="M19 11v9M10.4 30l7-5M27.6 30l-7-5"/><path d="M38 21c0 0-4.5 5.2-4.5 8.3a4.5 4.5 0 0 0 9 0C42.5 26.2 38 21 38 21Z"/></svg>',
+  bulb: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6a12 12 0 0 0-7 21.8c1.4 1 2 2.6 2 4.2v1h10v-1c0-1.6.6-3.2 2-4.2A12 12 0 0 0 24 6Z"/><path d="M20 38h8M21 42h6"/></svg>',
+  wiper: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 38a24 24 0 0 1 24-24"/><path d="M40 38a24 24 0 0 0-6.5-16.4" stroke-width="1.6" opacity="0.45"/><path d="M8 38h32"/><circle cx="32" cy="14" r="2.2" fill="currentColor" stroke="none"/></svg>',
+  alternator: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="15"/><path d="M26 13l-8.5 12.5H23L21 34l9-13h-5.5L26 13Z" stroke-linejoin="round"/></svg>',
+  checkEngine: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 29v-7a4 4 0 0 1 4-4h4v-4h9v4h4a4 4 0 0 1 4 4v2h3v6h-3v1a4 4 0 0 1-4 4H17a4 4 0 0 1-4-4v-2H9Z"/><circle cx="37" cy="12" r="7" fill="#F0A73C" stroke="none"/><path d="M37 8.5v5" stroke="#2D3A06" stroke-width="2.2"/><circle cx="37" cy="16" r="1.1" fill="#2D3A06" stroke="none"/></svg>'
+};
+
 function render() {
   const grid = document.getElementById('services-grid');
   const q = searchQuery.toLowerCase().trim();
@@ -593,23 +645,26 @@ function render() {
 
   grid.innerHTML = filtered.map((s, i) => `
     <div class="svc-card" style="animation-delay:${Math.min(i * 30, 300)}ms">
-      <div class="svc-card-top">
-        <span class="svc-cat-badge">${esc(s.cat)}</span>
-        ${s.time ? `<span class="svc-time">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+      ${s.icon && ICONS[s.icon] ? `<div class="svc-card-image" aria-hidden="true">${ICONS[s.icon]}</div>` : ''}
+      <div class="svc-card-body">
+        <div class="svc-card-top">
+          <span class="svc-cat-badge">${esc(s.cat)}</span>
+          ${s.time ? `<span class="svc-time">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+            </svg>
+            ${esc(s.time)}
+          </span>` : ''}
+        </div>
+        <h3 class="svc-name">${esc(s.name)}</h3>
+        <p class="svc-desc">${esc(s.desc)}</p>
+        <a href="autovivo-vehicle-select.html" class="svc-book">
+          Book Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
-          ${esc(s.time)}
-        </span>` : ''}
+        </a>
       </div>
-      <h3 class="svc-name">${esc(s.name)}</h3>
-      <p class="svc-desc">${esc(s.desc)}</p>
-      <a href="autovivo-vehicle-select.html" class="svc-book">
-        Book Now
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
     </div>
   `).join('');
 }

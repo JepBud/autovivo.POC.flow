@@ -763,7 +763,7 @@
 
   .compare-table {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr 1fr;
   }
 
   .compare-row, .compare-row-head { display: contents; }
@@ -1058,7 +1058,7 @@
 
     /* Compare */
     .section-compare { padding: var(--space-16) 0; }
-    .compare-table   { grid-template-columns: 1.1fr 1fr 1fr 1fr; min-width: 720px; }
+    .compare-table   { grid-template-columns: 1.1fr 1fr 1fr; min-width: 560px; }
     .compare-head-cell, .compare-feature, .compare-cell { padding: var(--space-4) var(--space-3); font-size: var(--text-xs); }
     .compare-feature            { padding-left: var(--space-5); }
     .compare-head-cell:first-child { padding-left: var(--space-5); }
@@ -1331,7 +1331,6 @@
   <ul class="nav-links" id="nav-links" role="list">
     <li><a href="#" class="active">Home</a></li>
     <li><a href="autovivo-services.html">Services</a></li>
-    <li><a href="autovivo-gallery.html">Gallery</a></li>
     <li><a href="#services">About</a></li>
     <li><a href="#contact">Contact</a></li>
     <li class="nav-menu-cta"><a href="autovivo-vehicle-select.html">Book Now</a></li>
@@ -1581,7 +1580,7 @@
 
     <div class="section-header anim">
       <span class="eyebrow">The Difference</span>
-      <h2 class="section-title" id="compare-title">AutoVivo <span>vs.</span> The Old Way</h2>
+      <h2 class="section-title" id="compare-title">AutoVivo <span>vs.</span> The Traditional Shop</h2>
       <p class="section-subtitle">
         Same expert repairs — without the drive, the wait, or the surprises.
       </p>
@@ -1589,7 +1588,7 @@
 
     <div class="compare-card anim d2">
       <div class="compare-scroll">
-        <div class="compare-table" role="table" aria-label="AutoVivo compared to a traditional auto shop and a dealership">
+        <div class="compare-table" role="table" aria-label="AutoVivo compared to a traditional auto shop">
 
           <div class="compare-row-head" role="row">
             <div class="compare-head-cell" role="columnheader">
@@ -1601,9 +1600,6 @@
             <div class="compare-head-cell" role="columnheader">
               <span class="compare-head-label">Traditional Shop</span>
             </div>
-            <div class="compare-head-cell" role="columnheader">
-              <span class="compare-head-label">Dealership</span>
-            </div>
           </div>
 
           <div class="compare-row" role="row">
@@ -1613,9 +1609,6 @@
             </div>
             <div class="compare-cell is-them" role="cell">
               <span class="compare-icon no" aria-hidden="true">✕</span> You drive there and wait
-            </div>
-            <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Drive in, drop off, wait for a ride
             </div>
           </div>
 
@@ -1627,9 +1620,6 @@
             <div class="compare-cell is-them" role="cell">
               <span class="compare-icon no" aria-hidden="true">✕</span> 30–90+ min in a waiting room
             </div>
-            <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Often a full day or overnight hold
-            </div>
           </div>
 
           <div class="compare-row" role="row">
@@ -1639,9 +1629,6 @@
             </div>
             <div class="compare-cell is-them" role="cell">
               <span class="compare-icon no" aria-hidden="true">✕</span> Estimate can change mid-service
-            </div>
-            <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Premium dealer labor rates
             </div>
           </div>
 
@@ -1653,9 +1640,6 @@
             <div class="compare-cell is-them" role="cell">
               <span class="compare-icon no" aria-hidden="true">✕</span> Phone calls &amp; hold music
             </div>
-            <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Appointments booked out weeks
-            </div>
           </div>
 
           <div class="compare-row" role="row">
@@ -1666,9 +1650,6 @@
             <div class="compare-cell is-them" role="cell">
               <span class="compare-icon no" aria-hidden="true">✕</span> Whoever's on shift
             </div>
-            <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Brand-certified, shared across bays
-            </div>
           </div>
 
           <div class="compare-row" role="row">
@@ -1678,9 +1659,6 @@
             </div>
             <div class="compare-cell is-them" role="cell">
               <span class="compare-icon no" aria-hidden="true">✕</span> Booked out for days
-            </div>
-            <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Tied to service dept. hours
             </div>
           </div>
 
@@ -2020,7 +1998,7 @@
               </svg>
             </a>
             <!-- Facebook -->
-            <a href="https://www.facebook.com/profile.php?id=61592779245894" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+            <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
               </svg>
@@ -2036,7 +2014,6 @@
           <ul class="footer-links" role="list">
             <li><a href="autovivo-home.html">Home</a></li>
             <li><a href="autovivo-services.html">Services</a></li>
-            <li><a href="autovivo-gallery.html">Gallery</a></li>
             <li><a href="#services">About</a></li>
             <li><a href="#reviews">Reviews</a></li>
             <li><a href="#contact">Contact</a></li>
