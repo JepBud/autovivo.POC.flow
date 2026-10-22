@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AUTO VIVO — Mobile Auto Service</title>
+<link rel="preload" as="image" type="image/webp" href="Photos/hero/hero-1-tall.webp" media="(max-width: 768px)">
+<link rel="preload" as="image" type="image/webp" href="Photos/hero/hero-1-wide.webp" media="(min-width: 769px)">
+
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
@@ -21,7 +24,7 @@
     --color-neutral-800:       #F7F7F5;
     --color-neutral-700:       #EFEFEB;
     --color-neutral-600:       #E0E0DA;
-    --color-neutral-400:       #8C8C86;
+    --color-neutral-400:       #66665F;
     --color-neutral-200:       #3D3D3A;
     --color-neutral-100:       #1A1A18;
     --color-neutral-000:       #0A0A08;
@@ -350,67 +353,64 @@
   }
 
   /* ============================================================
-     HERO SECTION
+     HERO SECTION — full-bleed photo carousel
   ============================================================ */
   .hero {
     position: relative;
-    padding: var(--space-24) var(--space-8);
+    min-height: min(calc(100svh - 72px), 860px);
+    padding: var(--space-24) var(--space-8) var(--space-20);
     overflow: hidden;
-    min-height: 92vh;
     display: flex;
     align-items: center;
+    background: var(--g-deep, #1D2805);
+    color: #fff;
+    isolation: isolate;
   }
+  .hero-slides { position: absolute; inset: 0; z-index: -2; touch-action: pan-y; }
+  .hero-slide {
+    position: absolute; inset: 0; margin: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .hero-slide.is-active { opacity: 1; }
+  .hero-slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.08);
+    transition: transform 7.5s linear;
+  }
+  .hero-slide.is-active img { transform: scale(1); }
 
-  /* Atmospheric backgrounds */
-  .hero-bg-glow {
-    position: absolute;
-    inset: 0;
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: -1;
     background:
-      radial-gradient(ellipse 75% 65% at 72% 50%, rgba(74,124,16,0.06) 0%, transparent 65%),
-      radial-gradient(ellipse 40% 50% at 80% 15%, rgba(210,253,156,0.45) 0%, transparent 60%),
-      radial-gradient(ellipse 30% 30% at 10% 80%, rgba(74,124,16,0.04) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(74,124,16,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(74,124,16,0.07) 1px, transparent 1px);
-    background-size: 64px 64px;
-    pointer-events: none;
-    mask-image: radial-gradient(ellipse 90% 90% at center, transparent 15%, black 70%);
-    -webkit-mask-image: radial-gradient(ellipse 90% 90% at center, transparent 15%, black 70%);
+      linear-gradient(90deg, rgba(16,22,3,0.92) 0%, rgba(29,40,5,0.80) 34%, rgba(45,58,6,0.35) 66%, rgba(45,58,6,0.12) 100%),
+      linear-gradient(0deg, rgba(16,22,3,0.55) 0%, transparent 30%);
   }
 
   .hero-inner {
     max-width: 1200px;
     margin: 0 auto;
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-16);
-    align-items: center;
     width: 100%;
+    position: relative;
   }
+  .hero-copy { max-width: 720px; }
 
-  /* Live badge */
   .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    background: var(--color-brand-primary-bg);
-    border: 1px solid rgba(74,124,16,0.3);
+    background: rgba(210,253,156,0.12);
+    border: 1px solid rgba(210,253,156,0.35);
     border-radius: var(--radius-full);
     padding: var(--space-1) var(--space-4) var(--space-1) var(--space-3);
     margin-bottom: var(--space-6);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   }
   .hero-badge-dot {
-    width: 7px;
-    height: 7px;
-    background: var(--color-brand-primary);
+    width: 7px; height: 7px;
+    background: var(--color-brand-lime);
     border-radius: var(--radius-full);
     animation: pulse-glow 2s ease-in-out infinite;
     flex-shrink: 0;
@@ -420,7 +420,7 @@
     font-weight: 600;
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
-    color: var(--color-brand-primary);
+    color: var(--color-brand-lime);
   }
 
   .hero-headline {
@@ -429,37 +429,42 @@
     font-weight: 700;
     line-height: var(--leading-tight);
     letter-spacing: var(--tracking-tight);
-    color: var(--color-neutral-000);
+    color: #fff;
     margin-bottom: var(--space-6);
+    text-shadow: 0 2px 24px rgba(0,0,0,0.25);
   }
-  .hero-headline span { color: var(--color-brand-primary); }
+  .hero-headline span { color: var(--color-brand-lime); }
 
   .hero-body {
     font-size: var(--text-lg);
-    color: var(--color-neutral-400);
+    color: rgba(255,255,255,0.84);
     line-height: var(--leading-normal);
-    max-width: 480px;
+    max-width: 500px;
     margin-bottom: var(--space-10);
   }
 
   .hero-actions { display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; }
+  .hero .btn-primary { background: var(--color-brand-lime); color: var(--color-brand-secondary); border-color: var(--color-brand-lime); }
+  .hero .btn-primary:hover { background: #E2FFBD; box-shadow: 0 8px 28px rgba(210,253,156,0.28); }
+  .hero .btn-ghost { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.42); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .hero .btn-ghost:hover { background: rgba(255,255,255,0.14); border-color: #fff; color: #fff; }
 
   .hero-stats {
     display: flex;
     gap: var(--space-8);
     margin-top: var(--space-12);
     padding-top: var(--space-8);
-    border-top: 1px solid var(--color-neutral-600);
+    border-top: 1px solid rgba(255,255,255,0.18);
   }
   .hero-stat-num {
     font-family: var(--font-display);
     font-size: var(--text-3xl);
     font-weight: 700;
-    color: var(--color-neutral-000);
+    color: #fff;
     letter-spacing: var(--tracking-tight);
     line-height: 1;
   }
-  .hero-stat-num em { color: var(--color-brand-primary); font-style: normal; }
+  .hero-stat-num em { color: var(--color-brand-lime); font-style: normal; }
   a.hero-stat-link {
     text-decoration: none;
     display: block;
@@ -469,86 +474,70 @@
     transition: background var(--duration-base) var(--ease-out);
     cursor: pointer;
   }
-  a.hero-stat-link:hover { background: var(--color-neutral-800); }
-  a.hero-stat-link:hover .hero-stat-label { color: var(--color-brand-primary); }
+  a.hero-stat-link:hover { background: rgba(255,255,255,0.08); }
+  a.hero-stat-link:hover .hero-stat-label { color: var(--color-brand-lime); }
   .hero-stat-label {
     font-size: var(--text-xs);
-    color: var(--color-neutral-400);
+    color: rgba(255,255,255,0.7);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     margin-top: var(--space-2);
     transition: color var(--duration-base) var(--ease-out);
   }
 
-  /* ---- Hero Visual ---- */
-  .hero-visual {
-    position: relative;
+  /* Carousel controls */
+  .hero-controls {
+    position: absolute;
+    right: var(--space-8);
+    bottom: var(--space-8);
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: var(--space-2);
+    z-index: 2;
+  }
+  .hero-ctrl {
+    width: 40px; height: 40px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(10,14,2,0.35);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    transition: background var(--duration-fast), border-color var(--duration-fast);
+  }
+  .hero-ctrl:hover { background: rgba(255,255,255,0.16); border-color: #fff; }
+  .hero-ctrl:focus-visible, .hero-dot:focus-visible { outline: 2px solid var(--color-brand-lime); outline-offset: 2px; }
+  .hero-pause { font-size: 14px; }
+  .hero-pause .ico-play { display: none; }
+  .hero-pause[aria-pressed="true"] .ico-play { display: inline-block; }
+  .hero-pause[aria-pressed="true"] .ico-pause { display: none; }
+  .hero-dots { display: flex; gap: 2px; padding: 0 var(--space-1); }
+  .hero-dot {
+    width: 36px; height: 40px;           /* generous tap target */
+    background: none; border: 0; padding: 0; cursor: pointer;
+    display: inline-flex; align-items: center;
+  }
+  .hero-dot span {
+    display: block; width: 100%; height: 3px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.35);
+    position: relative; overflow: hidden;
+  }
+  .hero-dot span::after {
+    content: ''; position: absolute; inset: 0;
+    background: var(--color-brand-lime);
+    transform: scaleX(0); transform-origin: left;
+  }
+  .hero-dot.is-active span::after { transform: scaleX(1); transition: transform var(--hero-interval, 6s) linear; }
+  .hero.is-paused .hero-dot.is-active span::after { transition: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide, .hero-slide img, .hero-dot span::after { transition: none !important; }
+    .hero-slide img { transform: none; }
   }
 
-  .hero-photo-stage {
-    position: relative;
-    width: 100%;
-    max-width: 520px;
-  }
-
-  /* Main hero photo */
-  .hero-photo-main {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: var(--radius-xl);
-    display: block;
-    box-shadow: var(--shadow-lg);
-  }
-
-  /* Secondary floating photo */
-  .hero-photo-secondary {
-    position: absolute;
-    bottom: -24px;
-    left: -28px;
-    width: 52%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: var(--radius-lg);
-    border: 3px solid var(--color-neutral-900);
-    box-shadow: var(--shadow-lg);
-    animation: float 5s ease-in-out infinite;
-  }
-
-  /* Floating info chips */
-  .float-chip {
-    position: absolute;
-    background: var(--color-neutral-800);
-    border: 1px solid var(--color-neutral-600);
-    border-radius: var(--radius-lg);
-    padding: var(--space-3) var(--space-4);
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    box-shadow: var(--shadow-md);
-    z-index: 3;
-    animation: fadeUp 0.9s var(--ease-out) both;
-    white-space: nowrap;
-  }
-  .float-chip-icon { font-size: 22px; flex-shrink: 0; }
-  .float-chip-label {
-    font-family: var(--font-body);
-    font-size: var(--text-xs);
-    font-weight: 500;
-    color: var(--color-neutral-000);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    display: block;
-  }
-  .float-chip-sub { font-size: var(--text-xs); color: var(--color-neutral-400); display: block; }
-
-  /* Chips hang off outside corners — top-left and bottom-right so they don't
-     cover the photo subject or collide with the secondary photo (bottom-left) */
-  .chip-top-right { top: -18px;    left: -22px; right: auto; animation-delay: 0.4s; }
-  .chip-bot-left  { bottom: -18px; right: -22px; left: auto; animation-delay: 0.6s; }
 
   /* ============================================================
      TRUST STRIP
@@ -928,9 +917,6 @@
   ============================================================ */
   @media (max-width: 1024px) {
     .hero-headline  { font-size: var(--text-5xl); }
-    .hero-inner     { gap: var(--space-10); }
-    .chip-top-right { left: -10px; right: auto; }
-    .chip-bot-left  { right: -10px; left: auto; }
 
     .process-grid          { grid-template-columns: repeat(2, 1fr); gap: var(--space-8); }
     .process-connector     { display: none; }
@@ -1025,27 +1011,26 @@
 
     /* Hero */
     .hero {
-      padding: var(--space-16) var(--space-5) var(--space-12);
-      min-height: auto;
+      min-height: calc(100svh - 72px);
+      padding: var(--space-24) var(--space-5) var(--space-10);
+      align-items: flex-end;
     }
-    .hero-inner {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: var(--space-10);
+    .hero-overlay {
+      background:
+        linear-gradient(0deg, rgba(16,22,3,0.97) 0%, rgba(22,30,4,0.88) 48%, rgba(35,46,5,0.35) 70%, rgba(16,22,3,0.10) 86%, rgba(16,22,3,0.40) 100%);
     }
-    .hero-headline { font-size: var(--text-4xl); }
-    .hero-body     { margin-left: auto; margin-right: auto; }
-    .hero-actions  { justify-content: center; }
-    .hero-badge    { margin: 0 auto var(--space-6); }
-    .hero-stats    { justify-content: center; }
-    .hero-visual   { order: -1; }
-    .hero-photo-stage { max-width: 340px; }
-    .hero-photo-secondary { width: 44%; left: -16px; bottom: -16px; }
-    .chip-top-right { left: -8px; right: auto; top: -14px; }
-    .chip-bot-left  { right: -8px; left: auto; bottom: -14px; }
-    .float-chip { padding: var(--space-2) var(--space-3); gap: var(--space-2); }
-    .float-chip-icon { font-size: 16px; }
-    .float-chip-label, .float-chip-sub { font-size: 10px; }
+    .hero-headline { font-size: 2.5rem; margin-bottom: var(--space-4); }
+    .hero-body     { font-size: var(--text-base); margin-bottom: var(--space-8); }
+    .hero-badge    { margin-bottom: var(--space-4); }
+    .hero-actions  { gap: var(--space-3); }
+    .hero-actions .btn { flex: 1 1 0; justify-content: center; text-align: center; }
+    .hero-stats    { gap: var(--space-5); margin-top: var(--space-8); padding-top: var(--space-6); justify-content: space-between; }
+    .hero-stat-num { font-size: var(--text-2xl); }
+    .hero-stat-label { font-size: 10px; }
+    .hero-controls { top: var(--space-4); right: var(--space-4); bottom: auto; }
+    .hero-prev, .hero-next { display: none; }
+    .hero-ctrl { width: 36px; height: 36px; }
+    .hero-dot { width: 28px; height: 36px; }
 
     /* Selling */
     .section-selling { padding: var(--space-16) 0; }
@@ -1095,18 +1080,15 @@
      RESPONSIVE — SMALL MOBILE (≤ 480px)
   ============================================================ */
   @media (max-width: 480px) {
-    .hero-headline  { font-size: var(--text-3xl); }
-    .hero-stats     { flex-direction: column; gap: var(--space-5); align-items: center; }
-    .hero-actions   { flex-direction: column; width: 100%; }
-    .hero-actions .btn { width: 100%; justify-content: center; }
-    .chip-top-right,
-    .chip-bot-left  { display: none; }
+    .hero-headline  { font-size: 2.25rem; }
+    .hero-actions .btn { padding: var(--space-4) var(--space-4); font-size: var(--text-base); }
+    /* Nav CTA: keep on one line next to the logo */
+    .nav-actions .btn { white-space: nowrap; padding: var(--space-2) var(--space-4); font-size: var(--text-xs); }
+    .nav-logo-img { height: 30px; width: auto; }
 
     .process-grid   { grid-template-columns: 1fr; }
     .cta-headline   { font-size: var(--text-3xl); }
 
-    .hero-photo-stage { max-width: 280px; }
-    .hero-photo-secondary { width: 40%; left: -10px; bottom: -10px; }
 
     .reviews-viewport { padding: 0 var(--space-5); }
     .review-card      { min-width: 288px; }
@@ -1318,6 +1300,57 @@
     width: 20px;
   }
 
+
+  /* Inline SVG icons (replaced emoji, Oct 2026) */
+  .ico { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
+  .ico-star { vertical-align: -0.1em; }
+  .selling-icon, .process-step-icon { color: var(--color-brand-primary); }
+  .trust-icon, .float-chip-icon { color: var(--color-brand-tertiary); display: inline-flex; }
+  .float-chip-icon { color: var(--color-brand-lime); }
+  .review-stars .ico, .reviews-google-badge-stars .ico { margin-right: 1px; }
+  .hero-stat-num em .ico { width: .8em; height: .8em; vertical-align: 0; }
+
+  /* ============================================================
+     GREEN SYSTEM — one gradient family used site-wide (Oct 2026)
+     deep → dark → brand → lime, plus one pale tint for light sections
+  ============================================================ */
+  :root {
+    --g-deep:   #1D2805;
+    --g-dark:   #2D3A06;
+    --g-mid:    #4A7C10;
+    --g-lime:   #D2FD9C;
+    --g-tint:   #F4F9EC;
+    --g-tint-2: #E6F1D6;
+    --grad-brand:  linear-gradient(135deg, #1D2805 0%, #2D3A06 45%, #4A7C10 100%);
+    --glow-dark:   radial-gradient(ellipse 70% 90% at 85% 0%, rgba(210,253,156,0.16) 0%, transparent 60%);
+    --grad-header: radial-gradient(ellipse 60% 90% at 85% 0%, rgba(210,253,156,0.42) 0%, transparent 60%),
+                   linear-gradient(180deg, #F4F9EC 0%, #FFFFFF 100%);
+  }
+  .footer { background: var(--g-tint); border-top-color: var(--g-tint-2); }
+
+  /* Home: dark hero flows into a dark trust strip, light sections step through
+     one pale-green tint, and the page closes on the brand gradient. */
+  .trust-strip { background: var(--g-deep); border-color: transparent; }
+  .trust-label { color: rgba(255,255,255,0.86); }
+  .trust-strip .trust-icon { color: var(--g-lime); }
+  .trust-sep { background: rgba(255,255,255,0.16); }
+
+  .section-selling { background: linear-gradient(180deg, #FFFFFF 0%, var(--g-tint) 100%); }
+  .section-process { background: var(--g-tint); }
+  .section-compare { background: linear-gradient(180deg, var(--g-tint) 0%, #FFFFFF 100%); }
+  .section-reviews { background: linear-gradient(180deg, #FFFFFF 0%, var(--g-tint) 100%); }
+  .section-process::before, .section-reviews::before, .section-selling::before { display: none; }
+
+  .section-cta { background: var(--glow-dark), var(--grad-brand); }
+  .section-cta::before { display: none; }
+  .section-cta .eyebrow { color: var(--g-lime); }
+  .section-cta .cta-headline { color: #fff; }
+  .section-cta .cta-headline span { color: var(--g-lime); }
+  .section-cta .cta-body { color: rgba(255,255,255,0.78); }
+  .section-cta .cta-ring { border-color: rgba(210,253,156,0.14); }
+  .section-cta .cta-ring-2 { border-color: rgba(210,253,156,0.07); }
+  .section-cta .btn-primary { background: var(--g-lime); color: var(--g-dark); }
+  .section-cta .btn-primary:hover { background: #E2FFBD; box-shadow: 0 8px 28px rgba(210,253,156,0.25); }
 </style>
 </head>
 <body>
@@ -1326,7 +1359,7 @@
   NAVIGATION
 ========================================================= -->
 <nav class="nav" id="navbar" role="navigation" aria-label="Main navigation">
-  <a href="#" class="nav-logo" aria-label="AutoVivo Home"><img src="LOGO.PNG" alt="AutoVivo" class="nav-logo-img"></a>
+  <a href="#" class="nav-logo" aria-label="AutoVivo Home"><img src="logo-web.png" alt="AutoVivo" class="nav-logo-img"></a>
 
   <ul class="nav-links" id="nav-links" role="list">
     <li><a href="#" class="active">Home</a></li>
@@ -1350,14 +1383,46 @@
 <!-- =========================================================
   HERO
 ========================================================= -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-bg-glow" aria-hidden="true"></div>
-  <div class="hero-grid"    aria-hidden="true"></div>
+<section class="hero" id="hero" aria-roledescription="carousel" aria-label="AutoVivo technicians at work">
+  <div class="hero-slides" id="hero-slides" aria-live="off">
+    <figure class="hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 4">
+      <picture>
+        <source type="image/webp" media="(max-width: 768px)" srcset="Photos/hero/hero-1-tall.webp">
+        <source media="(max-width: 768px)" srcset="Photos/hero/hero-1-tall.jpg">
+        <source type="image/webp" srcset="Photos/hero/hero-1-wide.webp">
+        <img src="Photos/hero/hero-1-wide.jpg" alt="AutoVivo technician working under the hood of a customer's vehicle in their driveway" decoding="async" fetchpriority="high">
+      </picture>
+    </figure>
+    <figure class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 4" aria-hidden="true">
+      <picture>
+        <source type="image/webp" media="(max-width: 768px)" srcset="Photos/hero/hero-2-tall.webp">
+        <source media="(max-width: 768px)" srcset="Photos/hero/hero-2-tall.jpg">
+        <source type="image/webp" srcset="Photos/hero/hero-2-wide.webp">
+        <img src="Photos/hero/hero-2-wide.jpg" alt="AutoVivo technician running a computer diagnostic from the driver's seat" decoding="async" loading="lazy">
+      </picture>
+    </figure>
+    <figure class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 4" aria-hidden="true">
+      <picture>
+        <source type="image/webp" media="(max-width: 768px)" srcset="Photos/hero/hero-3-tall.webp">
+        <source media="(max-width: 768px)" srcset="Photos/hero/hero-3-tall.jpg">
+        <source type="image/webp" srcset="Photos/hero/hero-3-wide.webp">
+        <img src="Photos/hero/hero-3-wide.jpg" alt="On-site engine bay service at a customer's home" decoding="async" loading="lazy">
+      </picture>
+    </figure>
+    <figure class="hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 4" aria-hidden="true">
+      <picture>
+        <source type="image/webp" media="(max-width: 768px)" srcset="Photos/hero/hero-4-tall.webp">
+        <source media="(max-width: 768px)" srcset="Photos/hero/hero-4-tall.jpg">
+        <source type="image/webp" srcset="Photos/hero/hero-4-wide.webp">
+        <img src="Photos/hero/hero-4-wide.jpg" alt="Dealer-level diagnostic laptop connected inside a customer vehicle" decoding="async" loading="lazy">
+      </picture>
+    </figure>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
 
   <div class="hero-inner">
-
-    <!-- LEFT — COPY -->
-    <div>
+    <div class="hero-copy">
+      <div>
       <div class="hero-badge anim d1" aria-label="Now serving your area">
         <span class="hero-badge-dot" aria-hidden="true"></span>
         <span class="hero-badge-text">Now Serving Your Area</span>
@@ -1388,44 +1453,24 @@
           <div class="hero-stat-label">Satisfaction Rate</div>
         </a>
         <a href="#reviews" class="hero-stat-link" aria-label="5 star average rating — see customer reviews">
-          <div class="hero-stat-num">5<em>★</em></div>
+          <div class="hero-stat-num">5<em><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></em></div>
           <div class="hero-stat-label">Avg. Rating</div>
         </a>
       </div>
     </div>
-
-    <!-- RIGHT — VISUAL -->
-    <div class="hero-visual anim d3" aria-hidden="true">
-      <div class="hero-photo-stage">
-        <img
-          src="Photos/tech_outside_pic_1.1.jpeg"
-          alt="AutoVivo technician performing on-site repair"
-          class="hero-photo-main"
-        >
-        <img
-          src="Photos/Landscape_laptop_car.jpeg"
-          alt="Diagnostic scan in progress"
-          class="hero-photo-secondary"
-        >
-
-        <div class="float-chip chip-top-right">
-          <span class="float-chip-icon">🔧</span>
-          <div>
-            <span class="float-chip-label">On-Site Repair</span>
-            <span class="float-chip-sub">At your location</span>
-          </div>
-        </div>
-
-        <div class="float-chip chip-bot-left">
-          <span class="float-chip-icon">⚡</span>
-          <div>
-            <span class="float-chip-label">Fast Booking</span>
-            <span class="float-chip-sub">Confirmed in minutes</span>
-          </div>
-        </div>
-      </div>
     </div>
+  </div>
 
+  <div class="hero-controls">
+    <button class="hero-ctrl hero-prev" type="button" aria-label="Previous photo"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="hero-dots" role="group" aria-label="Choose photo">
+        <button class="hero-dot is-active" type="button" data-slide="0" aria-label="Show photo 1" aria-current="true"><span></span></button>
+        <button class="hero-dot" type="button" data-slide="1" aria-label="Show photo 2"><span></span></button>
+        <button class="hero-dot" type="button" data-slide="2" aria-label="Show photo 3"><span></span></button>
+        <button class="hero-dot" type="button" data-slide="3" aria-label="Show photo 4"><span></span></button>
+    </div>
+    <button class="hero-ctrl hero-next" type="button" aria-label="Next photo"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+    <button class="hero-ctrl hero-pause" type="button" aria-label="Pause slideshow" aria-pressed="false"><svg class="ico ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="ico ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
   </div>
 </section>
 
@@ -1436,27 +1481,27 @@
 <div class="trust-strip" role="list" aria-label="Trust indicators">
   <div class="trust-strip-inner">
     <div class="trust-item" role="listitem">
-      <span class="trust-icon" aria-hidden="true">✓</span>
+      <span class="trust-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
       <span class="trust-label">Licensed &amp; Insured</span>
     </div>
     <div class="trust-sep" aria-hidden="true"></div>
     <div class="trust-item" role="listitem">
-      <span class="trust-icon" aria-hidden="true">🔒</span>
+      <span class="trust-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
       <span class="trust-label">Work Guaranteed</span>
     </div>
     <div class="trust-sep" aria-hidden="true"></div>
     <div class="trust-item" role="listitem">
-      <span class="trust-icon" aria-hidden="true">📍</span>
+      <span class="trust-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
       <span class="trust-label">We Come to You</span>
     </div>
     <div class="trust-sep" aria-hidden="true"></div>
     <div class="trust-item" role="listitem">
-      <span class="trust-icon" aria-hidden="true">⏱</span>
+      <span class="trust-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
       <span class="trust-label">Same-Day Availability</span>
     </div>
     <div class="trust-sep" aria-hidden="true"></div>
     <div class="trust-item" role="listitem">
-      <span class="trust-icon" aria-hidden="true">💳</span>
+      <span class="trust-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></span>
       <span class="trust-label">Transparent Pricing</span>
     </div>
   </div>
@@ -1481,7 +1526,7 @@
 
       <!-- Card 1 -->
       <article class="selling-card anim d1">
-        <div class="selling-icon" aria-hidden="true">🚐</div>
+        <div class="selling-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62L18.3 9.38A1 1 0 0 0 17.52 9H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>
         <h3 class="selling-card-title">Mobile Auto Service</h3>
         <p class="selling-card-body">
           Skip the shop entirely. Our fully-equipped mobile units come directly to your home, office, or any location of your choosing — delivering the same quality repairs you'd expect from a traditional garage, without any of the hassle.
@@ -1490,7 +1535,7 @@
 
       <!-- Card 2 -->
       <article class="selling-card anim d2">
-        <div class="selling-icon" aria-hidden="true">🛠️</div>
+        <div class="selling-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
         <h3 class="selling-card-title">Expert Technicians</h3>
         <p class="selling-card-body">
           Every technician on our team is certified, highly experienced, and genuinely passionate about cars. From routine oil changes to complex diagnostics, your vehicle is always in the hands of a true professional you can trust.
@@ -1499,7 +1544,7 @@
 
       <!-- Card 3 -->
       <article class="selling-card anim d3">
-        <div class="selling-icon" aria-hidden="true">📱</div>
+        <div class="selling-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
         <h3 class="selling-card-title">Simple &amp; Easy Booking</h3>
         <p class="selling-card-body">
           Schedule your service in minutes with our streamlined online system. Choose your service, pick a time that works for you, and receive instant confirmation — no phone calls, no hold music, no stress.
@@ -1531,7 +1576,7 @@
       <!-- Step 1 -->
       <div class="process-step anim d1" role="listitem">
         <div class="process-num" aria-label="Step 1">01</div>
-        <span class="process-step-icon" aria-hidden="true">💻</span>
+        <span class="process-step-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
         <h3 class="process-step-title">Book Online</h3>
         <p class="process-step-body">
           Select your service and pick a date and time that fits your schedule — all done in minutes from any device, anywhere.
@@ -1541,7 +1586,7 @@
       <!-- Step 2 -->
       <div class="process-step anim d2" role="listitem">
         <div class="process-num" aria-label="Step 2">02</div>
-        <span class="process-step-icon" aria-hidden="true">✅</span>
+        <span class="process-step-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
         <h3 class="process-step-title">Secure Confirmation</h3>
         <p class="process-step-body">
           Get instant booking confirmation with your appointment details, assigned technician info, and a fully transparent service quote.
@@ -1551,7 +1596,7 @@
       <!-- Step 3 -->
       <div class="process-step anim d3" role="listitem">
         <div class="process-num" aria-label="Step 3">03</div>
-        <span class="process-step-icon" aria-hidden="true">🚐</span>
+        <span class="process-step-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62L18.3 9.38A1 1 0 0 0 17.52 9H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></span>
         <h3 class="process-step-title">We Come to You</h3>
         <p class="process-step-body">
           Your technician arrives at your chosen location, fully equipped and ready to work — on time, every single time.
@@ -1561,7 +1606,7 @@
       <!-- Step 4 -->
       <div class="process-step anim d4" role="listitem">
         <div class="process-num" aria-label="Step 4">04</div>
-        <span class="process-step-icon" aria-hidden="true">🏁</span>
+        <span class="process-step-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg></span>
         <h3 class="process-step-title">Complete Service</h3>
         <p class="process-step-body">
           Sit back while we handle everything. Once complete, you'll receive a full service report and can pay securely on-site.
@@ -1609,78 +1654,78 @@
           <div class="compare-row" role="row">
             <div class="compare-feature" role="rowheader">Where it happens</div>
             <div class="compare-cell is-us" role="cell">
-              <span class="compare-icon yes" aria-hidden="true">✓</span> At your home, office, or curb
+              <span class="compare-icon yes" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> At your home, office, or curb
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> You drive there and wait
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> You drive there and wait
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Drive in, drop off, wait for a ride
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Drive in, drop off, wait for a ride
             </div>
           </div>
 
           <div class="compare-row" role="row">
             <div class="compare-feature" role="rowheader">Average wait</div>
             <div class="compare-cell is-us" role="cell">
-              <span class="compare-icon yes" aria-hidden="true">✓</span> 0 min — we come to you
+              <span class="compare-icon yes" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 0 min — we come to you
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> 30–90+ min in a waiting room
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> 30–90+ min in a waiting room
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Often a full day or overnight hold
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Often a full day or overnight hold
             </div>
           </div>
 
           <div class="compare-row" role="row">
             <div class="compare-feature" role="rowheader">Pricing</div>
             <div class="compare-cell is-us" role="cell">
-              <span class="compare-icon yes" aria-hidden="true">✓</span> Upfront, transparent quote
+              <span class="compare-icon yes" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> Upfront, transparent quote
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Estimate can change mid-service
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Estimate can change mid-service
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Premium dealer labor rates
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Premium dealer labor rates
             </div>
           </div>
 
           <div class="compare-row" role="row">
             <div class="compare-feature" role="rowheader">Booking</div>
             <div class="compare-cell is-us" role="cell">
-              <span class="compare-icon yes" aria-hidden="true">✓</span> Online in under 2 minutes
+              <span class="compare-icon yes" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> Online in under 2 minutes
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Phone calls &amp; hold music
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Phone calls &amp; hold music
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Appointments booked out weeks
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Appointments booked out weeks
             </div>
           </div>
 
           <div class="compare-row" role="row">
             <div class="compare-feature" role="rowheader">Technician</div>
             <div class="compare-cell is-us" role="cell">
-              <span class="compare-icon yes" aria-hidden="true">✓</span> Certified specialist, every visit
+              <span class="compare-icon yes" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> Certified specialist, every visit
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Whoever's on shift
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Whoever's on shift
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Brand-certified, shared across bays
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Brand-certified, shared across bays
             </div>
           </div>
 
           <div class="compare-row" role="row">
             <div class="compare-feature" role="rowheader">Availability</div>
             <div class="compare-cell is-us" role="cell">
-              <span class="compare-icon yes" aria-hidden="true">✓</span> Same-day slots, most areas
+              <span class="compare-icon yes" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> Same-day slots, most areas
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Booked out for days
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Booked out for days
             </div>
             <div class="compare-cell is-them" role="cell">
-              <span class="compare-icon no" aria-hidden="true">✕</span> Tied to service dept. hours
+              <span class="compare-icon no" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Tied to service dept. hours
             </div>
           </div>
 
@@ -1716,7 +1761,7 @@
           <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
           <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
         </svg>
-        <span class="reviews-google-badge-stars">★★★★★</span>
+        <span class="reviews-google-badge-stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
         <span class="reviews-google-badge-text">Rated 5.0 on Google</span>
       </div>
       <h2 class="reviews-headline" id="reviews-title">
@@ -1741,7 +1786,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">"Amazing service. The mechanic came to my driveway and fixed my brakes in under an hour."</p>
           </article>
 
@@ -1754,7 +1799,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">My car wouldn't start and it turned out to be a bad alternator. The mechanic came right to my location, diagnosed it quickly, and had the replacement done efficiently. No upselling — just honest work and solid communication throughout. Super convenient.</p>
           </article>
 
@@ -1767,7 +1812,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">Booked an oil change and tire change, and they came right to my driveway in Scarborough. The technician was on time, friendly, and worked efficiently — done in about an hour while I stayed inside working. Pricing was fair and exactly as listed. This is 100% how I'll be servicing my car going forward.</p>
           </article>
 
@@ -1780,7 +1825,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">Got a new infotainment system installed and the service was excellent. The mechanic was on time, professional, and did a clean installation. Everything works perfectly and was explained clearly before he left. Highly recommend.</p>
           </article>
 
@@ -1793,7 +1838,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">"Fast, clean, and affordable. Will definitely be using them again."</p>
           </article>
 
@@ -1806,7 +1851,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">"Reliable, honest, and professional auto service — delivering high quality care at a fair price, right when you need it."</p>
           </article>
 
@@ -1819,7 +1864,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">"Way better than going to a shop. Booked online and they came to my condo in Scarborough. Highly recommend."</p>
           </article>
 
@@ -1832,7 +1877,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">Got my brakes serviced and the experience was great. The mechanic was punctual, explained what needed to be replaced, and completed the job quickly and professionally. The car feels much safer — braking is smooth again. Really convenient mobile service.</p>
           </article>
 
@@ -1845,7 +1890,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">I had a minor brake issue and thought I'd have to take my car to a shop. These guys came to my driveway, diagnosed the problem, and fixed it in under an hour. Honest, transparent, and very friendly — highly recommend this mobile auto hub.</p>
           </article>
 
@@ -1858,7 +1903,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">I was honestly skeptical at first, but this was one of the easiest car service experiences I've had. Booked an oil change and they came right to my place in Pickering. The technician was professional, explained everything clearly, and didn't try to upsell anything unnecessary.</p>
           </article>
 
@@ -1871,7 +1916,7 @@
                 <div class="review-source">Google Review</div>
               </div>
             </div>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <div class="review-stars" role="img" aria-label="5 stars"><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="ico ico-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
             <p class="review-body">Great service from start to finish. Booking was simple, communication was clear, and they arrived exactly when they said they would. Got my battery replaced without having to leave my house in Ajax. Huge time saver.</p>
           </article>
 
@@ -1993,7 +2038,7 @@
 
       <!-- Brand Column -->
       <div>
-        <img src="LOGO.PNG" alt="AutoVivo" class="footer-logo-img">
+        <img src="logo-web.png" alt="AutoVivo" class="footer-logo-img">
         <p class="footer-tagline">
           Professional mobile auto repair and maintenance — delivered directly to your doorstep. Wherever you are, we've got you covered.
         </p>
@@ -2104,7 +2149,7 @@
       <span class="floating-cart-detail" id="floating-cart-detail">Your selections are saved</span>
     </div>
   </a>
-  <button class="floating-cart-dismiss" id="floating-cart-dismiss" aria-label="Dismiss">✕</button>
+  <button class="floating-cart-dismiss" id="floating-cart-dismiss" aria-label="Dismiss"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
 </div>
 
 <!-- =========================================================
@@ -2199,5 +2244,63 @@
   })();
 </script>
 
+
+<script>
+/* Hero carousel — autoplay, swipe, keyboard, pause, reduced-motion aware */
+(function () {
+  const hero = document.getElementById('hero');
+  if (!hero) return;
+  const slides = [...hero.querySelectorAll('.hero-slide')];
+  const dots = [...hero.querySelectorAll('.hero-dot')];
+  const pauseBtn = hero.querySelector('.hero-pause');
+  const INTERVAL = 6000;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  hero.style.setProperty('--hero-interval', INTERVAL + 'ms');
+  let i = 0, timer = null, userPaused = reduce;
+
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach((s, k) => { s.classList.toggle('is-active', k === i); s.toggleAttribute('aria-hidden', k !== i); });
+    dots.forEach((d, k) => {
+      d.classList.remove('is-active'); d.removeAttribute('aria-current');
+      if (k === i) { void d.offsetWidth; d.classList.add('is-active'); d.setAttribute('aria-current', 'true'); }
+    });
+    schedule();
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (!userPaused && !document.hidden) timer = setTimeout(() => go(i + 1), INTERVAL);
+  }
+  function setPaused(p) {
+    userPaused = p;
+    hero.classList.toggle('is-paused', p);
+    pauseBtn.setAttribute('aria-pressed', String(p));
+    pauseBtn.setAttribute('aria-label', p ? 'Play slideshow' : 'Pause slideshow');
+    p ? clearTimeout(timer) : go(i);
+  }
+
+  hero.querySelector('.hero-prev').addEventListener('click', () => go(i - 1));
+  hero.querySelector('.hero-next').addEventListener('click', () => go(i + 1));
+  dots.forEach((d, k) => d.addEventListener('click', () => go(k)));
+  pauseBtn.addEventListener('click', () => setPaused(!userPaused));
+  document.addEventListener('visibilitychange', schedule);
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') go(i - 1);
+    if (e.key === 'ArrowRight') go(i + 1);
+  });
+
+  // Swipe (touch) — only reacts to clearly horizontal gestures so vertical scroll stays smooth
+  let x0 = null, y0 = null;
+  hero.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  hero.addEventListener('touchend', e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) go(i + (dx < 0 ? 1 : -1));
+    x0 = y0 = null;
+  }, { passive: true });
+
+  if (reduce) setPaused(true); else schedule();
+})();
+</script>
 </body>
 </html>

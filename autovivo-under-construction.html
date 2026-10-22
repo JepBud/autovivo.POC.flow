@@ -17,7 +17,7 @@
     --color-neutral-800:       #F7F7F5;
     --color-neutral-700:       #EFEFEB;
     --color-neutral-600:       #E0E0DA;
-    --color-neutral-400:       #8C8C86;
+    --color-neutral-400:       #66665F;
     --color-neutral-200:       #3D3D3A;
     --color-neutral-100:       #1A1A18;
     --color-neutral-000:       #0A0A08;
@@ -252,6 +252,26 @@
     .footer-grid { grid-template-columns: 1fr; gap: var(--space-8); }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
   }
+
+  /* ============================================================
+     GREEN SYSTEM — one gradient family used site-wide (Oct 2026)
+     deep → dark → brand → lime, plus one pale tint for light sections
+  ============================================================ */
+  :root {
+    --g-deep:   #1D2805;
+    --g-dark:   #2D3A06;
+    --g-mid:    #4A7C10;
+    --g-lime:   #D2FD9C;
+    --g-tint:   #F4F9EC;
+    --g-tint-2: #E6F1D6;
+    --grad-brand:  linear-gradient(135deg, #1D2805 0%, #2D3A06 45%, #4A7C10 100%);
+    --glow-dark:   radial-gradient(ellipse 70% 90% at 85% 0%, rgba(210,253,156,0.16) 0%, transparent 60%);
+    --grad-header: radial-gradient(ellipse 60% 90% at 85% 0%, rgba(210,253,156,0.42) 0%, transparent 60%),
+                   linear-gradient(180deg, #F4F9EC 0%, #FFFFFF 100%);
+  }
+  .footer { background: var(--g-tint); border-top-color: var(--g-tint-2); }
+
+  body { background-color: #FFFFFF; background-image: var(--grad-header); background-repeat: no-repeat; background-size: 100% 100%; min-height: 100vh; }
 </style>
 </head>
 <body>
@@ -259,7 +279,7 @@
   <!-- Navbar -->
   <nav class="nav">
     <a href="autovivo-home.html" class="nav-logo">
-      <img src="LOGO.PNG" alt="AutoVivo" class="nav-logo-img">
+      <img src="logo-web.png" alt="AutoVivo" class="nav-logo-img">
     </a>
   </nav>
 
@@ -315,7 +335,7 @@
 
       <!-- Brand -->
       <div>
-        <img src="LOGO.PNG" alt="AutoVivo" class="footer-logo-img">
+        <img src="logo-web.png" alt="AutoVivo" class="footer-logo-img">
         <p class="footer-tagline">Professional mobile auto repair and maintenance — delivered directly to your doorstep. Wherever you are, we've got you covered.</p>
         <nav aria-label="Social media links">
           <div class="footer-social">
