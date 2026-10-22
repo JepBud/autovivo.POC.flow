@@ -10,7 +10,7 @@
     --color-brand-primary:#4A7C10;--color-brand-primary-bg:#E8F7D2;--color-brand-secondary:#2D3A06;
     --color-brand-tertiary:#619111;--color-brand-lime:#D2FD9C;--color-neutral-900:#FFFFFF;
     --color-neutral-800:#F7F7F5;--color-neutral-700:#EFEFEB;--color-neutral-600:#E0E0DA;
-    --color-neutral-400:#8C8C86;--color-neutral-200:#3D3D3A;--color-neutral-100:#1A1A18;
+    --color-neutral-400:#66665F;--color-neutral-200:#3D3D3A;--color-neutral-100:#1A1A18;
     --color-neutral-000:#0A0A08;--color-success:#1D7A45;--color-success-bg:#E8F5EE;
     --color-warning:#A05C00;--color-warning-bg:#FEF3E2;--color-error:#C0290E;--color-error-bg:#FDECEA;
     --font-display:'Montserrat',sans-serif;--font-body:'DM Sans',sans-serif;
@@ -329,13 +329,20 @@ body{background:var(--color-neutral-900);color:var(--color-neutral-100);font-fam
   .footer { background: var(--g-tint); border-top-color: var(--g-tint-2); }
 
   body { background-color: #FFFFFF; background-image: var(--grad-header); background-repeat: no-repeat; background-size: 100% 560px; }
+
+@media(max-width:640px){
+  .svc-card-img{display:none}
+  .filter-pill{min-height:44px;font-size:var(--text-sm)}
+  .svc-search{font-size:16px}
+}
+.svc-cat{color:#3F6A0D}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="autovivo-home.html" class="nav-logo" aria-label="AutoVivo Home"><img src="LOGO.PNG" alt="AutoVivo" class="nav-logo-img"></a>
+  <a href="autovivo-home.html" class="nav-logo" aria-label="AutoVivo Home"><img src="logo-web.png" alt="AutoVivo" class="nav-logo-img"></a>
   <a href="autovivo-vehicle-select.html" class="nav-back">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
     Back
@@ -1298,7 +1305,7 @@ updateUI();
 
       <!-- Brand -->
       <div>
-        <img src="LOGO.PNG" alt="AutoVivo" class="footer-logo-img">
+        <img src="logo-web.png" alt="AutoVivo" class="footer-logo-img">
         <p class="footer-tagline">Professional mobile auto repair and maintenance — delivered directly to your doorstep. Wherever you are, we've got you covered.</p>
         <nav aria-label="Social media links">
           <div class="footer-social">

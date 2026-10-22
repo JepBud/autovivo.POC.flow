@@ -17,7 +17,7 @@
     --color-neutral-800:      #F7F7F5;
     --color-neutral-700:      #EFEFEB;
     --color-neutral-600:      #E0E0DA;
-    --color-neutral-400:      #8C8C86;
+    --color-neutral-400:      #66665F;
     --color-neutral-200:      #3D3D3A;
     --color-neutral-100:      #1A1A18;
     --color-neutral-000:      #0A0A08;
@@ -293,6 +293,8 @@
   .hero { background: var(--grad-header); backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom-color: var(--g-tint-2); }
   .section-cta { background: var(--glow-dark), var(--grad-brand); }
   .section-cta .btn-primary { background: var(--g-lime); color: var(--g-dark); }
+  .gallery-item img { height: auto; }
+  .hero-eyebrow { color: #3F6A0D; }
 </style>
 </head>
 <body>
@@ -300,7 +302,7 @@
 <!-- NAV -->
 <nav class="nav">
   <a href="autovivo-home.html" class="nav-logo">
-    <img src="LOGO.PNG" alt="AutoVivo" class="nav-logo-img">
+    <img src="logo-web.png" alt="AutoVivo" class="nav-logo-img">
   </a>
   <ul class="nav-links">
     <li><a href="autovivo-home.html">Home</a></li>
@@ -332,20 +334,20 @@
   </div>
 
   <div class="gallery-grid" id="gallery-grid">
-    <figure class="gallery-item"><img loading="lazy" src="Photos/tech_outside_pic_1.0.jpeg" alt="AutoVivo technician working under the hood of a vehicle in a driveway"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/tech_outside_pic_1.1.jpeg" alt="AutoVivo technician performing a driveway repair"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/tech_outside_pic_1.2.jpeg" alt="AutoVivo technician servicing a vehicle on location"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/landscape_car_laptop.jpeg" alt="Diagnostic laptop running vehicle software inside a car"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/Landscape_laptop_car.jpeg" alt="Diagnostic laptop set up on a car seat during service"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/portrait_laptop_tech.jpeg" alt="AutoVivo technician running vehicle diagnostics on a laptop"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/tech_portrait_laptop.jpeg" alt="AutoVivo technician reviewing diagnostic results"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/landscape_laptop_tech.jpeg" alt="Technician and diagnostic laptop during a service call"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/landscape_tech_laptop.jpeg" alt="AutoVivo technician with diagnostic laptop on location"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/laptop_car_landscape.jpeg" alt="Diagnostic laptop connected to a vehicle"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/portrait_car_laptop.jpeg" alt="Vehicle diagnostics in progress"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/tech_landscape_laptop.jpeg" alt="AutoVivo technician at work with diagnostic equipment"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/laptop_landscape_tech.jpeg" alt="Diagnostic session during an AutoVivo service call"></figure>
-    <figure class="gallery-item"><img loading="lazy" src="Photos/Portrait_laptop_car.jpeg" alt="Laptop diagnostics set up inside a vehicle"></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/tech_outside_pic_1.0-480.webp 480w, Photos/web/tech_outside_pic_1.0-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/tech_outside_pic_1.0-800.jpg" width="800" height="1067" data-full="Photos/web/tech_outside_pic_1.0-1600.webp" alt="AutoVivo technician working under the hood of a vehicle in a driveway"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/tech_outside_pic_1.1-480.webp 480w, Photos/web/tech_outside_pic_1.1-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/tech_outside_pic_1.1-800.jpg" width="800" height="1067" data-full="Photos/web/tech_outside_pic_1.1-1600.webp" alt="AutoVivo technician performing a driveway repair"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/tech_outside_pic_1.2-480.webp 480w, Photos/web/tech_outside_pic_1.2-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/tech_outside_pic_1.2-800.jpg" width="800" height="1067" data-full="Photos/web/tech_outside_pic_1.2-1600.webp" alt="AutoVivo technician servicing a vehicle on location"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/landscape_car_laptop-480.webp 480w, Photos/web/landscape_car_laptop-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/landscape_car_laptop-800.jpg" width="800" height="600" data-full="Photos/web/landscape_car_laptop-1600.webp" alt="Diagnostic laptop running vehicle software inside a car"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/Landscape_laptop_car-480.webp 480w, Photos/web/Landscape_laptop_car-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/Landscape_laptop_car-800.jpg" width="800" height="600" data-full="Photos/web/Landscape_laptop_car-1600.webp" alt="Diagnostic laptop set up on a car seat during service"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/portrait_laptop_tech-480.webp 480w, Photos/web/portrait_laptop_tech-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/portrait_laptop_tech-800.jpg" width="800" height="1067" data-full="Photos/web/portrait_laptop_tech-1600.webp" alt="AutoVivo technician running vehicle diagnostics on a laptop"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/tech_portrait_laptop-480.webp 480w, Photos/web/tech_portrait_laptop-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/tech_portrait_laptop-800.jpg" width="800" height="1067" data-full="Photos/web/tech_portrait_laptop-1600.webp" alt="AutoVivo technician reviewing diagnostic results"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/landscape_laptop_tech-480.webp 480w, Photos/web/landscape_laptop_tech-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/landscape_laptop_tech-800.jpg" width="800" height="600" data-full="Photos/web/landscape_laptop_tech-1600.webp" alt="Technician and diagnostic laptop during a service call"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/landscape_tech_laptop-480.webp 480w, Photos/web/landscape_tech_laptop-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/landscape_tech_laptop-800.jpg" width="800" height="600" data-full="Photos/web/landscape_tech_laptop-1600.webp" alt="AutoVivo technician with diagnostic laptop on location"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/laptop_car_landscape-480.webp 480w, Photos/web/laptop_car_landscape-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/laptop_car_landscape-800.jpg" width="800" height="600" data-full="Photos/web/laptop_car_landscape-1600.webp" alt="Diagnostic laptop connected to a vehicle"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/portrait_car_laptop-480.webp 480w, Photos/web/portrait_car_laptop-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/portrait_car_laptop-800.jpg" width="800" height="1067" data-full="Photos/web/portrait_car_laptop-1600.webp" alt="Vehicle diagnostics in progress"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/tech_landscape_laptop-480.webp 480w, Photos/web/tech_landscape_laptop-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/tech_landscape_laptop-800.jpg" width="800" height="600" data-full="Photos/web/tech_landscape_laptop-1600.webp" alt="AutoVivo technician at work with diagnostic equipment"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/laptop_landscape_tech-480.webp 480w, Photos/web/laptop_landscape_tech-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/laptop_landscape_tech-800.jpg" width="800" height="600" data-full="Photos/web/laptop_landscape_tech-1600.webp" alt="Diagnostic session during an AutoVivo service call"></picture></figure>
+    <figure class="gallery-item"><picture><source type="image/webp" srcset="Photos/web/Portrait_laptop_car-480.webp 480w, Photos/web/Portrait_laptop_car-800.webp 800w" sizes="(max-width: 768px) 50vw, 380px"><img loading="lazy" decoding="async" src="Photos/web/Portrait_laptop_car-800.jpg" width="800" height="1067" data-full="Photos/web/Portrait_laptop_car-1600.webp" alt="Laptop diagnostics set up inside a vehicle"></picture></figure>
   </div>
 
   <!-- Video section -->
@@ -393,7 +395,7 @@
 
       <!-- Brand -->
       <div>
-        <img src="LOGO.PNG" alt="AutoVivo" class="footer-logo-img">
+        <img src="logo-web.png" alt="AutoVivo" class="footer-logo-img">
         <p class="footer-tagline">Professional mobile auto repair and maintenance — delivered directly to your doorstep. Wherever you are, we've got you covered.</p>
         <nav aria-label="Social media links">
           <div class="footer-social">
@@ -480,14 +482,14 @@
 
   function openLightbox(i) {
     current = i;
-    lightboxImg.src = items[current].src;
+    lightboxImg.src = items[current].dataset.full || items[current].currentSrc || items[current].src;
     lightboxImg.alt = items[current].alt;
     lightbox.classList.add('open');
   }
   function closeLightbox() { lightbox.classList.remove('open'); }
   function show(delta) {
     current = (current + delta + items.length) % items.length;
-    lightboxImg.src = items[current].src;
+    lightboxImg.src = items[current].dataset.full || items[current].currentSrc || items[current].src;
     lightboxImg.alt = items[current].alt;
   }
 

@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AUTO VIVO — Mobile Auto Service</title>
+<link rel="preload" as="image" type="image/webp" href="Photos/hero/hero-1-tall.webp" media="(max-width: 768px)">
+<link rel="preload" as="image" type="image/webp" href="Photos/hero/hero-1-wide.webp" media="(min-width: 769px)">
+
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
@@ -21,7 +24,7 @@
     --color-neutral-800:       #F7F7F5;
     --color-neutral-700:       #EFEFEB;
     --color-neutral-600:       #E0E0DA;
-    --color-neutral-400:       #8C8C86;
+    --color-neutral-400:       #66665F;
     --color-neutral-200:       #3D3D3A;
     --color-neutral-100:       #1A1A18;
     --color-neutral-000:       #0A0A08;
@@ -1356,7 +1359,7 @@
   NAVIGATION
 ========================================================= -->
 <nav class="nav" id="navbar" role="navigation" aria-label="Main navigation">
-  <a href="#" class="nav-logo" aria-label="AutoVivo Home"><img src="LOGO.PNG" alt="AutoVivo" class="nav-logo-img"></a>
+  <a href="#" class="nav-logo" aria-label="AutoVivo Home"><img src="logo-web.png" alt="AutoVivo" class="nav-logo-img"></a>
 
   <ul class="nav-links" id="nav-links" role="list">
     <li><a href="#" class="active">Home</a></li>
@@ -1384,25 +1387,33 @@
   <div class="hero-slides" id="hero-slides" aria-live="off">
     <figure class="hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 4">
       <picture>
+        <source type="image/webp" media="(max-width: 768px)" srcset="Photos/hero/hero-1-tall.webp">
         <source media="(max-width: 768px)" srcset="Photos/hero/hero-1-tall.jpg">
+        <source type="image/webp" srcset="Photos/hero/hero-1-wide.webp">
         <img src="Photos/hero/hero-1-wide.jpg" alt="AutoVivo technician working under the hood of a customer's vehicle in their driveway" decoding="async" fetchpriority="high">
       </picture>
     </figure>
     <figure class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 4" aria-hidden="true">
       <picture>
+        <source type="image/webp" media="(max-width: 768px)" srcset="Photos/hero/hero-2-tall.webp">
         <source media="(max-width: 768px)" srcset="Photos/hero/hero-2-tall.jpg">
+        <source type="image/webp" srcset="Photos/hero/hero-2-wide.webp">
         <img src="Photos/hero/hero-2-wide.jpg" alt="AutoVivo technician running a computer diagnostic from the driver's seat" decoding="async" loading="lazy">
       </picture>
     </figure>
     <figure class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 4" aria-hidden="true">
       <picture>
+        <source type="image/webp" media="(max-width: 768px)" srcset="Photos/hero/hero-3-tall.webp">
         <source media="(max-width: 768px)" srcset="Photos/hero/hero-3-tall.jpg">
+        <source type="image/webp" srcset="Photos/hero/hero-3-wide.webp">
         <img src="Photos/hero/hero-3-wide.jpg" alt="On-site engine bay service at a customer's home" decoding="async" loading="lazy">
       </picture>
     </figure>
     <figure class="hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 4" aria-hidden="true">
       <picture>
+        <source type="image/webp" media="(max-width: 768px)" srcset="Photos/hero/hero-4-tall.webp">
         <source media="(max-width: 768px)" srcset="Photos/hero/hero-4-tall.jpg">
+        <source type="image/webp" srcset="Photos/hero/hero-4-wide.webp">
         <img src="Photos/hero/hero-4-wide.jpg" alt="Dealer-level diagnostic laptop connected inside a customer vehicle" decoding="async" loading="lazy">
       </picture>
     </figure>
@@ -2027,7 +2038,7 @@
 
       <!-- Brand Column -->
       <div>
-        <img src="LOGO.PNG" alt="AutoVivo" class="footer-logo-img">
+        <img src="logo-web.png" alt="AutoVivo" class="footer-logo-img">
         <p class="footer-tagline">
           Professional mobile auto repair and maintenance — delivered directly to your doorstep. Wherever you are, we've got you covered.
         </p>
