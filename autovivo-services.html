@@ -197,7 +197,7 @@
     width: 100%;
     height: 180px;
     flex-shrink: 0;
-    background: linear-gradient(135deg, var(--color-brand-secondary) 0%, var(--color-brand-primary) 100%);
+    background: var(--grad-brand);
     overflow: hidden;
   }
   .svc-card-image img {
@@ -213,7 +213,7 @@
     display: none;
     position: absolute; inset: 0;
     align-items: center; justify-content: center;
-    background: linear-gradient(135deg, var(--color-brand-secondary) 0%, var(--color-brand-primary) 100%);
+    background: var(--grad-brand);
   }
   .svc-card-image-fallback svg {
     width: 44px; height: 44px; color: rgba(255,255,255,.7);
@@ -328,6 +328,26 @@
     .footer-bottom { flex-direction: column; align-items: flex-start; }
   }
 
+
+  /* ============================================================
+     GREEN SYSTEM — one gradient family used site-wide (Oct 2026)
+     deep → dark → brand → lime, plus one pale tint for light sections
+  ============================================================ */
+  :root {
+    --g-deep:   #1D2805;
+    --g-dark:   #2D3A06;
+    --g-mid:    #4A7C10;
+    --g-lime:   #D2FD9C;
+    --g-tint:   #F4F9EC;
+    --g-tint-2: #E6F1D6;
+    --grad-brand:  linear-gradient(135deg, #1D2805 0%, #2D3A06 45%, #4A7C10 100%);
+    --glow-dark:   radial-gradient(ellipse 70% 90% at 85% 0%, rgba(210,253,156,0.16) 0%, transparent 60%);
+    --grad-header: radial-gradient(ellipse 60% 90% at 85% 0%, rgba(210,253,156,0.42) 0%, transparent 60%),
+                   linear-gradient(180deg, #F4F9EC 0%, #FFFFFF 100%);
+  }
+  .footer { background: var(--g-tint); border-top-color: var(--g-tint-2); }
+
+  .hero { background: var(--grad-header); backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom-color: var(--g-tint-2); }
 </style>
 </head>
 <body>

@@ -120,7 +120,7 @@ body{background:var(--color-neutral-900);color:var(--color-neutral-100);font-fam
 
 /* SERVICE CARDS */
 .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.svc-card{background:var(--color-neutral-800);border:1.5px solid var(--color-neutral-600);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:all .2s var(--ease-out)}.svc-card-img{width:100%;height:150px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,var(--color-brand-secondary) 0%,var(--color-brand-primary) 100%)}.svc-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1)}.svc-card:hover .svc-card-img img{transform:scale(1.05)}.svc-card-img-fallback{display:none;width:100%;height:100%;align-items:center;justify-content:center}.svc-card-img-fallback svg{width:36px;height:36px;color:rgba(255,255,255,.6)}.svc-card-row{padding:14px 16px;display:flex;align-items:flex-start;gap:12px;flex:1}
+.svc-card{background:var(--color-neutral-800);border:1.5px solid var(--color-neutral-600);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:all .2s var(--ease-out)}.svc-card-img{width:100%;height:150px;overflow:hidden;flex-shrink:0;background:var(--grad-brand)}.svc-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1)}.svc-card:hover .svc-card-img img{transform:scale(1.05)}.svc-card-img-fallback{display:none;width:100%;height:100%;align-items:center;justify-content:center}.svc-card-img-fallback svg{width:36px;height:36px;color:rgba(255,255,255,.6)}.svc-card-row{padding:14px 16px;display:flex;align-items:flex-start;gap:12px;flex:1}
 .svc-card:hover{border-color:rgba(74,124,16,.3);box-shadow:0 2px 12px rgba(0,0,0,.04)}
 .svc-card.in-cart{border-color:var(--color-brand-primary);background:rgba(74,124,16,.03)}
 .svc-body{flex:1;min-width:0}
@@ -300,6 +300,35 @@ body{background:var(--color-neutral-900);color:var(--color-neutral-100);font-fam
     .footer-grid { grid-template-columns: 1fr; gap: var(--space-8); }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
   }
+
+  /* Inline SVG icons (replaced emoji, Oct 2026) */
+  .ico { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
+  .ico-star { vertical-align: -0.1em; }
+.vb-car{color:var(--color-brand-primary);display:inline-flex}
+.pkg-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:1px}
+.pkg-dot-bronze{background:linear-gradient(135deg,#C98B5B,#8A5530)}
+.pkg-dot-silver{background:linear-gradient(135deg,#D9DDE0,#8E979D)}
+.pkg-dot-gold{background:linear-gradient(135deg,#F2D16B,#B98A1C)}
+
+  /* ============================================================
+     GREEN SYSTEM — one gradient family used site-wide (Oct 2026)
+     deep → dark → brand → lime, plus one pale tint for light sections
+  ============================================================ */
+  :root {
+    --g-deep:   #1D2805;
+    --g-dark:   #2D3A06;
+    --g-mid:    #4A7C10;
+    --g-lime:   #D2FD9C;
+    --g-tint:   #F4F9EC;
+    --g-tint-2: #E6F1D6;
+    --grad-brand:  linear-gradient(135deg, #1D2805 0%, #2D3A06 45%, #4A7C10 100%);
+    --glow-dark:   radial-gradient(ellipse 70% 90% at 85% 0%, rgba(210,253,156,0.16) 0%, transparent 60%);
+    --grad-header: radial-gradient(ellipse 60% 90% at 85% 0%, rgba(210,253,156,0.42) 0%, transparent 60%),
+                   linear-gradient(180deg, #F4F9EC 0%, #FFFFFF 100%);
+  }
+  .footer { background: var(--g-tint); border-top-color: var(--g-tint-2); }
+
+  body { background-color: #FFFFFF; background-image: var(--grad-header); background-repeat: no-repeat; background-size: 100% 560px; }
 </style>
 </head>
 <body>
@@ -316,10 +345,10 @@ body{background:var(--color-neutral-900);color:var(--color-neutral-100);font-fam
 <!-- VEHICLE HEADER -->
 <div class="vehicle-bar" id="vehicle-bar">
   <div class="vb-info">
-    <span class="vb-car">🚗</span>
+    <span class="vb-car"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span>
     <span class="vb-name" id="vb-name">2003 Honda Accord EX</span>
     <span class="vb-sep"></span>
-    <span class="vb-loc">📍 <span id="vb-loc">Pickering</span></span>
+    <span class="vb-loc"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> <span id="vb-loc">Pickering</span></span>
   </div>
   <button class="vb-cart-btn" id="open-cart-btn" type="button" aria-label="View cart">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="14" r="1"/><circle cx="13" cy="14" r="1"/><path d="M1 1h2l1.7 8.5a1 1 0 0 0 1 .8h7.1a1 1 0 0 0 1-.7L15 4H5"/></svg>
@@ -331,7 +360,7 @@ body{background:var(--color-neutral-900);color:var(--color-neutral-100);font-fam
 <!-- PROGRESS -->
 <div class="booking-progress">
   <div class="progress-inner">
-    <div class="progress-step done"><div class="step-bubble">✓</div><span class="step-name">Vehicle</span></div>
+    <div class="progress-step done"><div class="step-bubble"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div><span class="step-name">Vehicle</span></div>
     <div class="progress-line"></div>
     <div class="progress-step active" aria-current="step"><div class="step-bubble">2</div><span class="step-name">Service</span></div>
     <div class="progress-line"></div>
@@ -366,7 +395,7 @@ body{background:var(--color-neutral-900);color:var(--color-neutral-100);font-fam
         <div class="svc-modal-eyebrow" id="svc-modal-eyebrow">A few quick questions</div>
         <div class="svc-modal-title" id="svc-modal-title">Service Name</div>
       </div>
-      <button class="svc-modal-close" id="svc-modal-close" aria-label="Close">✕</button>
+      <button class="svc-modal-close" id="svc-modal-close" aria-label="Close"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
     <div class="svc-modal-body" id="svc-modal-body">
       <!-- injected by JS -->
@@ -386,7 +415,7 @@ body{background:var(--color-neutral-900);color:var(--color-neutral-100);font-fam
 <div class="cart-panel" id="cart-panel" role="dialog" aria-modal="true" aria-label="Your cart">
   <div class="cart-header">
     <h2 class="cart-title" id="cart-title">Your Cart</h2>
-    <button class="cart-close" id="cart-close" aria-label="Close cart">✕</button>
+    <button class="cart-close" id="cart-close" aria-label="Close cart"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
   </div>
   <div class="cart-items" id="cart-items"></div>
   <div class="cart-footer" id="cart-footer">
@@ -429,7 +458,7 @@ body{background:var(--color-neutral-900);color:var(--color-neutral-100);font-fam
       <span class="floating-cart-detail" id="floating-cart-detail">Your selections are saved</span>
     </div>
   </a>
-  <button class="floating-cart-dismiss" id="floating-cart-dismiss" aria-label="Dismiss">✕</button>
+  <button class="floating-cart-dismiss" id="floating-cart-dismiss" aria-label="Dismiss"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
 </div>
 
 <script>
@@ -450,9 +479,9 @@ const isLarge = LARGE_MODELS.includes(V.model);
    PACKAGE DATA
 ============================================================ */
 const PACKAGES = [
-  {id:'bronze',tier:'Bronze',icon:'🥉',priceSmall:'$119.95',priceLarge:'$149.95',services:['Oil Change','Vehicle Health Check'],sub:'Essential'},
-  {id:'silver',tier:'Silver',icon:'⭐',priceSmall:'$159.95',priceLarge:'$189.95',services:['Oil Change','Alignment Inspection','Vehicle Health Check'],sub:'Popular',featured:true},
-  {id:'gold',tier:'Gold',icon:'🥇',priceSmall:'$319.95',priceLarge:'$349.95',services:['Oil Change','Alignment Inspection','Brake Fluid Flush','Cabin Air Filter','Vehicle Health Check'],sub:'Complete'}
+  {id:'bronze',tier:'Bronze',icon:'',priceSmall:'$119.95',priceLarge:'$149.95',services:['Oil Change','Vehicle Health Check'],sub:'Essential'},
+  {id:'silver',tier:'Silver',icon:'',priceSmall:'$159.95',priceLarge:'$189.95',services:['Oil Change','Alignment Inspection','Vehicle Health Check'],sub:'Popular',featured:true},
+  {id:'gold',tier:'Gold',icon:'',priceSmall:'$319.95',priceLarge:'$349.95',services:['Oil Change','Alignment Inspection','Brake Fluid Flush','Cabin Air Filter','Vehicle Health Check'],sub:'Complete'}
 ];
 const HEALTH_CHECK = ['Inspect & adjust all fluid levels under hood','4-wheel tire rotation','Brake inspection','Battery test','Steering & suspension inspection','Inspect CV axle boot condition','Inspect lights, wipers & washers','Inspect air & cabin air filter','Weatherstrip lubrication','Check underbody for damage or leaks'];
 
@@ -461,7 +490,7 @@ const HEALTH_CHECK = ['Inspect & adjust all fluid levels under hood','4-wheel ti
 ============================================================ */
 const SERVICES = [
   {id:0,cat:'Popular',name:'Oil Change',time:'30 min',desc:'Drain the old engine oil, replace it with fresh oil, and install a new oil filter to keep the engine properly lubricated and running smoothly.',questions:[{"text": "Synthetic (recommended) or conventional? Not sure", "type": "yesno"}, {"text": "Is there an oil leak?", "type": "yesno"}]},
-  {id:1,cat:'Popular',name:'Tires (Repair, Replacement & Flat Fix)',time:'30–60 min',desc:'We safely remove and install your tires at your location, ensuring they are properly mounted and ready for the road.',questions:[{"text": "What type of tire service do you need?", "type": "select", "options": ["Seasonal swap (winter ↔ summer on rims)", "Tire replacement (new tires)", "Flat tire change (install spare)", "Not sure"]}, {"text": "Do you have the tires ready at the location?", "type": "select", "options": ["Yes", "No"]}, {"text": "Do you have a wheel lock key (if applicable)?", "type": "select", "options": ["Yes", "No", "Not sure"]}]},
+  {id:1,cat:'Popular',name:'Tires (Repair, Replacement & Flat Fix)',time:'30–60 min',desc:'We safely remove and install your tires at your location, ensuring they are properly mounted and ready for the road.',questions:[{"text": "What type of tire service do you need?", "type": "select", "options": ["Seasonal swap (winter / summer on rims)", "Tire replacement (new tires)", "Flat tire change (install spare)", "Not sure"]}, {"text": "Do you have the tires ready at the location?", "type": "select", "options": ["Yes", "No"]}, {"text": "Do you have a wheel lock key (if applicable)?", "type": "select", "options": ["Yes", "No", "Not sure"]}]},
   {id:2,cat:'Popular',name:'Brake Pad Replacement',time:'45–60 min',desc:'Remove worn brake pads and install new ones to restore safe stopping power and prevent damage to the brake rotors',questions:[{"text": "Are you replacing front, rear, or both?", "type": "text", "options": []}, {"text": "Any squeaking or grinding noises?", "type": "text", "options": []}, {"text": "Want the rotors inspected/replaced too?", "type": "text", "options": []}]},
   {id:3,cat:'Popular',name:'Battery Replacement',time:'30–45 min',desc:'Remove the old battery and install a new one to ensure the vehicle starts reliably and the electrical system functions properly.',questions:[{"text": "What’s happening with the car?", "type": "select", "options": ["Won’t start", "Slow crank", "Battery light on", "Dead"]}, {"text": "Do you have jumper cables or need a boost?", "type": "yesno"}, {"text": "About how old is your battery? (<2 yrs / 2–4 yrs / 4+ yrs / Not sure)", "type": "text", "options": []}]},
   {id:4,cat:'Popular',name:'Tire Rotation',time:'20–30 min',desc:'Move tires between the front and rear positions to promote even tire wear and extend the life of the tires.',questions:[{"text": "Do you have a wheel lock key?", "type": "yesno"}, {"text": "Any vibrations or pulling while driving?", "type": "text", "options": []}]},
@@ -900,7 +929,7 @@ function openPkgModal(pkg) {
   const vehicleLabel = isLarge ? 'Truck / Large SUV' : 'Car / Small SUV';
 
   document.getElementById('svc-modal-eyebrow').textContent = 'Maintenance Package';
-  document.getElementById('svc-modal-title').textContent   = `${pkg.icon} ${pkg.tier} Package`;
+  document.getElementById('svc-modal-title').textContent   = `${pkg.tier} Package`;
 
   document.getElementById('svc-modal-body').innerHTML = `
     <div class="pkg-modal-prices">
@@ -1000,7 +1029,7 @@ function renderServices() {
         </div>
         <div class="svc-card-row" style="cursor:pointer">
           <div class="svc-body">
-            <div class="svc-name">${pkg.icon} ${pkg.tier} Package</div>
+            <div class="svc-name"><span class="pkg-dot pkg-dot-${pkg.id}" aria-hidden="true"></span>${pkg.tier} Package</div>
             <div class="svc-meta">
               <span class="svc-cat promo">Promo</span>
               <span class="svc-time">from ${price}</span>
@@ -1008,7 +1037,7 @@ function renderServices() {
             </div>
             <div class="svc-desc">${pkg.services.join(' · ')}</div>
           </div>
-          <button class="svc-add promo-add${inCart ? ' added' : ''}" data-pkg-id="${pkg.id}" type="button" aria-label="${inCart ? 'Manage' : 'View'} ${pkg.tier} Package">${inCart ? '✓' : '+'}</button>
+          <button class="svc-add promo-add${inCart ? ' added' : ''}" data-pkg-id="${pkg.id}" type="button" aria-label="${inCart ? 'Manage' : 'View'} ${pkg.tier} Package">${inCart ? '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' : '+'}</button>
         </div>
       </div>`;
     });
@@ -1049,7 +1078,7 @@ function renderServices() {
               </div>
               ${s.desc ? `<div class="svc-desc">${escHtml(s.desc)}</div>` : ''}
             </div>
-            <button class="svc-add${inCart ? ' added' : ''}" data-id="${s.id}" type="button" aria-label="${inCart ? 'Remove' : 'Add'} ${escHtml(s.name)}">${inCart ? '✓' : '+'}</button>
+            <button class="svc-add${inCart ? ' added' : ''}" data-id="${s.id}" type="button" aria-label="${inCart ? 'Remove' : 'Add'} ${escHtml(s.name)}">${inCart ? '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' : '+'}</button>
           </div>
         </div>`;
       }).join('');
@@ -1129,7 +1158,7 @@ function renderCart() {
   const continueBtn = document.getElementById('btn-cart-continue');
 
   if (cartCount() === 0) {
-    itemsEl.innerHTML = '<div class="cart-empty"><div style="font-size:48px;margin-bottom:12px">🛒</div><p>Your cart is empty.<br>Add a package or individual services.</p></div>';
+    itemsEl.innerHTML = '<div class="cart-empty"><div style="font-size:44px;margin-bottom:12px;color:var(--color-neutral-400)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></div><p>Your cart is empty.<br>Add a package or individual services.</p></div>';
     totalEl.textContent = '—';
     continueBtn.disabled = true;
     return;
@@ -1143,12 +1172,12 @@ function renderCart() {
     html += `<div class="cart-item">
       <div class="cart-item-main">
         <div class="cart-item-body">
-          <div class="cart-item-name">${cart.pkg.icon} ${cart.pkg.tier} Maintenance Package</div>
+          <div class="cart-item-name">${cart.pkg.tier} Maintenance Package</div>
           <div class="cart-item-detail">Oil change, health check & more</div>
         </div>
         <span class="cart-item-price">${cart.pkg.price}</span>
         <div class="cart-item-actions">
-          <button class="cart-item-btn cart-item-rm" data-rm-pkg="1" type="button" aria-label="Remove package" title="Remove">✕</button>
+          <button class="cart-item-btn cart-item-rm" data-rm-pkg="1" type="button" aria-label="Remove package" title="Remove"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
         </div>
       </div>
     </div>`;
@@ -1180,8 +1209,8 @@ function renderCart() {
           </div>
           <span class="cart-item-price" style="color:var(--color-neutral-400);font-size:var(--text-xs)">Quote</span>
           <div class="cart-item-actions">
-            ${hasQs ? `<button class="cart-item-btn cart-item-edit" data-edit="${s.id}" type="button" aria-label="Edit answers for ${escHtml(s.name)}" title="Edit answers">✎</button>` : ''}
-            <button class="cart-item-btn cart-item-rm" data-rm-svc="${s.id}" type="button" aria-label="Remove ${escHtml(s.name)}" title="Remove">✕</button>
+            ${hasQs ? `<button class="cart-item-btn cart-item-edit" data-edit="${s.id}" type="button" aria-label="Edit answers for ${escHtml(s.name)}" title="Edit answers"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button>` : ''}
+            <button class="cart-item-btn cart-item-rm" data-rm-svc="${s.id}" type="button" aria-label="Remove ${escHtml(s.name)}" title="Remove"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
           </div>
         </div>
         ${answersHtml}
